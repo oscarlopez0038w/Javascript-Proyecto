@@ -1,0 +1,60 @@
+/*GENERALES*/
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: beige;
+}
+body li{
+    list-style: none;
+    margin:10px;
+}
+
+body li a{
+    text-decoration: none;
+    color:black;
+}
+/*CSS DEL HOME*/
+header {
+    background-color: lightgrey;
+}
+
+header nav{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navegacion-desk ul{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/*MAIN DE INDEX*/
+.principal{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.juegoAdivinanza {
+    margin:20px auto;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.juegoAdivinanza h1{
+    padding: 5px;
+}
+
+.juegoAdivinanza p{
+    padding: 5px;
+}
+
+.juegoAdivinanza button{
+    margin: 5px;
+}

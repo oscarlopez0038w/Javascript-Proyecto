@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/estilo.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <section class="logo">
+
+            </section>
+            <section class="navegacion">
+                <div class="navegacion-desk">
+                    <ul>
+                        <li>
+                            <a href="index.html">Productos</a>
+                        </li>
+                        <li>
+                            <a href="./pages/servicios.html">Servicios</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </nav>
+    </header>
+    <main class="principal">
+        <section class="juegoAdivinanza">
+            <h1>Juego de Adivinanza</h1>
+            <p>Estoy pensando en un número entre 1 y 100. ¿Puedes adivinar cuál es?</p>
+            <input type="number" id="numeroUsuario" min="1" max="100">
+            <button onclick="adivinarNumero()">Adivinar</button>
+            <p id="resultado"></p>
+        </section>
+    </main>
+    <footer>
+        <section>
+
+        </section>
+    </footer>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
