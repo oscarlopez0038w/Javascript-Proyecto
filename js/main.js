@@ -62,3 +62,47 @@ function actualizarResultados() {
 
     sumaEdadesElement.textContent = `La suma de edades es: ${sumaEdades} años`;
 }
+
+const notaInput = document.getElementById("nota");
+    const agregarButton = document.getElementById("agregar");
+    const listaNotas = document.getElementById("lista-notas");
+
+    // Obtener las notas desde localStorage al cargar la página
+    const notas = JSON.parse(localStorage.getItem("notas")) || [];
+
+    // Mostrar las notas existentes en la página
+    function mostrarNotas() {
+      listaNotas.innerHTML = "";
+      notas.forEach((nota, index) => {
+        const li = document.createElement("li");
+        li.textContent = nota;
+        const botonEliminar = document.createElement("button");
+        botonEliminar.textContent = "Eliminar";
+        botonEliminar.addEventListener("click", () => eliminarNota(index));
+        li.appendChild(botonEliminar);
+        listaNotas.appendChild(li);
+      });
+    }
+
+    // Agregar una nota
+    function agregarNota() {
+      const nuevaNota = notaInput.value;
+      if (nuevaNota) {
+        notas.push(nuevaNota);
+        notaInput.value = "";
+        localStorage.setItem("notas", JSON.stringify(notas));
+        mostrarNotas();
+      }
+    }
+
+    // Eliminar una nota
+    function eliminarNota(index) {
+      notas.splice(index, 1);
+      localStorage.setItem("notas", JSON.stringify(notas));
+      mostrarNotas();
+    }
+
+    agregarButton.addEventListener("click", agregarNota);
+
+    // Mostrar las notas existentes al cargar la página
+    mostrarNotas();
