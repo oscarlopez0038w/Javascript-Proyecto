@@ -1,4 +1,5 @@
 /*GENERALES*/
+/* 
 *{
     margin:0;
     padding: 0;
@@ -16,7 +17,7 @@ body li a{
     text-decoration: none;
     color:black;
 }
-/*CSS DEL HOME*/
+CSS DEL HOME
 header {
     background-color: lightgrey;
 }
@@ -32,7 +33,7 @@ header nav{
     justify-content: space-between;
     align-items: center;
 }
-/*MAIN DE INDEX*/
+MAIN DE INDEX
 .principal{
     display:flex;
     flex-direction: column;
@@ -96,3 +97,156 @@ h1 {
     border-radius: 5px;
     box-shadow: 2px 2px 5px #aaa;
   }
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+}
+  .btn-shine{
+    position: absolute;
+    padding: 12px 48px;
+    color: #ffffff;
+    background: linear-gradient(to right, #4d4d4d 0, white 10%, #4d4d4d 20%);
+    background-position: 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s infinite linear;
+    animation-fill-mode: forwards;
+    -webkit-text-size-adjust: none;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    white-space: nowrap;
+  }  
+  
+  @keyframes shine {
+    0% {
+        background-position: 0;
+    }
+    60% {
+        background-position: 220px;
+    }
+    100% {
+        background-position: 220px;
+    }
+}
+
+*/
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    margin: 0;
+    font-size: 28px;
+}
+
+.cuerpo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    flex-wrap: wrap; /* Agrega esta propiedad para que los productos se muestren en una fila horizontal */
+}
+
+.producto {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: inline-block;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    width: 30%; /* Ajusta el ancho de los productos según tus necesidades */
+}
+
+.producto:hover {
+    transform: scale(1.05);
+}
+
+.producto img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #5d994e;
+}
+
+#carrito {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 30%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 100%; /* Ajusta el ancho del carrito según tus necesidades */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 10px;
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
+}
+
+@media (max-width: 1240px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    .producto {
+        width: 100%;
+    }
+
+    #carrito {
+        width: 90%;
+    }
+}
+
+@media (max-width: 769px) {
+    .producto {
+        width: 45%;
+    }
+
+    #carrito {
+        width: 60%;
+    }
+}

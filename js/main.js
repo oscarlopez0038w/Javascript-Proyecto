@@ -1,5 +1,5 @@
 
-  //Generar un número aleatorio entre 1 y 100
+/*  //Generar un número aleatorio entre 1 y 100
  const numeroSecreto = Math.floor(Math.random() * 100) + 1;
  let intentos = 0;
 
@@ -105,4 +105,133 @@ const notaInput = document.getElementById("nota");
     agregarButton.addEventListener("click", agregarNota);
 
     // Mostrar las notas existentes al cargar la página
-    mostrarNotas();
+    mostrarNotas(); */
+
+    let carrito = [];
+    let total = 0;
+    
+    // Función para cargar el carrito desde el localStorage al cargar la página
+    cargarCarritoDesdeLocalStorage();
+    
+    // Función para cargar el carrito desde el localStorage
+    function cargarCarritoDesdeLocalStorage() {
+        const carritoGuardado = localStorage.getItem('carrito');
+        const totalGuardado = localStorage.getItem('total');
+    
+        if (carritoGuardado && totalGuardado) {
+            carrito = JSON.parse(carritoGuardado);
+            total = parseFloat(totalGuardado);
+        }
+    
+        actualizarCarrito();
+    
+        // Habilitar el botón de "Pagar" si el carrito no está vacío
+        const pagarButton = document.getElementById('pagar');
+        if (carrito.length > 0) {
+            pagarButton.removeAttribute('disabled');
+        }
+    }
+    
+    // Función para guardar el carrito en el localStorage
+    function guardarCarritoEnLocalStorage() {
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        localStorage.setItem('total', total);
+    }
+    
+    // Función para agregar un producto al carrito
+    function agregarAlCarrito(nombre, precio) {
+        const producto = { nombre, precio };
+        carrito.push(producto);
+        total += precio;
+        actualizarCarrito();
+        guardarCarritoEnLocalStorage();
+    
+        // Mostrar una alerta de éxito con SweetAlert
+        Swal.fire({
+            title: 'Producto Agregado',
+            text: `${nombre} ha sido agregado al carrito.`,
+            icon: 'success'
+        });
+    
+        // Habilitar el botón de "Pagar" si hay productos en el carrito
+        const pagarButton = document.getElementById('pagar');
+        if (carrito.length > 0) {
+            pagarButton.removeAttribute('disabled');
+        }
+    }
+    
+    // Función para eliminar un producto del carrito
+    function eliminarDelCarrito(index) {
+        total -= carrito[index].precio;
+        carrito.splice(index, 1);
+        actualizarCarrito();
+        guardarCarritoEnLocalStorage();
+    
+        // Mostrar una alerta de éxito con SweetAlert
+        Swal.fire({
+            title: 'Producto Eliminado',
+            text: 'El producto ha sido eliminado del carrito.',
+            icon: 'success'
+        });
+    
+        // Habilitar o deshabilitar el botón de "Pagar" según si hay productos en el carrito
+        const pagarButton = document.getElementById('pagar');
+        if (carrito.length === 0) {
+            pagarButton.setAttribute('disabled', 'true');
+        }
+    }
+    
+    // Función para actualizar el carrito en la página
+    function actualizarCarrito() {
+        const listaCarrito = document.getElementById('lista-carrito');
+        const totalCarrito = document.getElementById('total-carrito');
+        listaCarrito.innerHTML = '';
+        carrito.forEach((item, index) => {
+            const li = document.createElement('li');
+            li.textContent = `${item.nombre} - $${item.precio}`;
+            const eliminarButton = document.createElement('button');
+            eliminarButton.textContent = 'Eliminar';
+            eliminarButton.onclick = () => eliminarDelCarrito(index);
+            li.appendChild(eliminarButton);
+            listaCarrito.appendChild(li);
+        });
+        totalCarrito.textContent = total;
+    }
+    
+    // Función para guardar el carrito como un archivo JSON
+    function guardarCarritoComoJSON() {
+        const carritoJSON = JSON.stringify({ carrito, total });
+        const blob = new Blob([carritoJSON], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'carrito.json';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+    }
+    
+    // Función para realizar la compra y limpiar el carrito
+    function realizarCompra() {
+        if (carrito.length > 0) {
+            // Realiza aquí la lógica de compra, por ejemplo, envío de datos al servidor, etc.
+    
+            // Limpia el carrito
+            carrito = [];
+            total = 0;
+            actualizarCarrito();
+            guardarCarritoEnLocalStorage();
+    
+            // Mostrar una alerta de éxito con SweetAlert
+            Swal.fire({
+                title: 'Compra Realizada',
+                text: 'La compra se ha realizado con éxito.',
+                icon: 'success'
+            });
+    
+            // Deshabilitar el botón de "Pagar" después de la compra
+            const pagarButton = document.getElementById('pagar');
+            pagarButton.setAttribute('disabled', 'true');
+        }
+    }
